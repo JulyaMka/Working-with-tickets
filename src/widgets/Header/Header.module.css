@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.group_button{
+  display: flex;
+  gap: 40px;
+}

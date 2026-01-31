@@ -1,0 +1,17 @@
+.button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.primary {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.secondary {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid #0b1220;
+}
+

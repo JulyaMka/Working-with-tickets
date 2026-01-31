@@ -1,0 +1,55 @@
+/*Светлая тема (по умолчанию)*/
+:root {
+  /* Page */
+  --bg-page: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --border-card: #E5E7EB;
+
+  /* Text */
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+
+  /* Table */
+  --table-bg: #FFFFFF;
+  --table-header-bg: #F9FAFB;
+  --table-row-alt: #FFFBEA;
+  --table-row-selected: #FEF3C7;
+  --border-table: #E5E7EB;
+
+  /* Alerts */
+  --alert-bg: #FFF1F2;
+  --alert-border: #FDA4AF;
+  --alert-text: #9F1239;
+
+  /* Buttons */
+  --btn-bg: #111827;
+  --btn-text: #FFFFFF;
+}
+
+/* Тёмная тема*/
+.dark {
+  /* Page */
+  --bg-page: #0A0A0A;
+  --bg-card: #0A0A0A;
+  --border-card: #E5E7EB;
+
+  /* Text */
+  --text-primary: #F3F5EF;
+  --text-secondary: #A3AEB3;
+
+  /* Table */
+  --table-bg: #0A0A0A;
+  --table-header-bg: #69513F;
+  --table-row-alt: #1B140D;
+  --table-row-selected: #0B0909;
+  --border-table: #E5E7EB;
+
+  /* Alerts */
+  --alert-bg: #280813;
+  --alert-border: #D90722;
+  --alert-text: #D90722;
+
+  /* Buttons */
+  --btn-bg: #E0E0E0;
+  --btn-text: #0A0A0A;
+}

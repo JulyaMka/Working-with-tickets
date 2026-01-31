@@ -1,0 +1,17 @@
+.page {
+  padding: 24px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 17px;
+}
+
+@media (max-width: 900px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+}
+
