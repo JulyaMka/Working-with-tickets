@@ -4,7 +4,7 @@ import styles from "./IncidentsPage.module.css";
 import { Incident } from "../../entities/incident";
 import { incidentsApi } from "../../shared/api/incidentsApi";
 import { fetchHotTickets } from "../../shared/api/alertsApi";
-
+import { InfoPanel } from "../../widgets/InfoPanel";
 import { Header } from "../../widgets/Header";
 import { AlertsPanel } from "../../widgets/AlertsPanel";
 import { IncidentsTable } from "../../widgets/IncidentsTable";
@@ -48,6 +48,7 @@ export const IncidentsPage = () => {
 
       {/* Top section */}
       <section className={styles.top}>
+        <InfoPanel/>
         {hotLoading ? (
           <div>Загрузка горящих инцидентов...</div>
         ) : (
