@@ -20,7 +20,6 @@ export const AlertsPanel = ({
         <Button
           variant="secondary"
           onClick={onRefresh}
-          disabled={hotLoading}
         >
           {hotLoading ? "Обновление..." : "Обновить"}
         </Button>

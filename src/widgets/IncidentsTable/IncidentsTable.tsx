@@ -8,6 +8,7 @@ type Props = {
   page: number;
   onPrev: () => void;
   onNext: () => void;
+  itemsPerPage?: number;
 };
 
 export const IncidentsTable = ({
@@ -17,15 +18,19 @@ export const IncidentsTable = ({
   page,
   onPrev,
   onNext,
+  itemsPerPage = 10,
 }: Props) => {
+  const rowsToFill = itemsPerPage - visible.length;
+
   return (
     <section className={styles.tableCard}>
       <div className={styles.tableHeader}>
         <h3>Список инцидентов</h3>
         <span>
-          Показано {start + 1}–{Math.min(start + 10, total)} из {total}
+          Показано {start + 1}–{Math.min(start + itemsPerPage, total)} из {total}
         </span>
       </div>
+
       <div className={styles.table_wrapper}>
         <table className={styles.table}>
           <thead>
@@ -52,13 +57,21 @@ export const IncidentsTable = ({
                     {item.priority}
                   </span>
                 </td>
-                <td>{item.description}</td>
-                <td
-                >
-                  {item.serviceStatus}
-                </td>
+                <td className={styles.ellipsis}>{item.description}</td>
+                <td>{item.serviceStatus}</td>
                 <td>{item.ticketStatus}</td>
                 <td>{item.branch}</td>
+              </tr>
+            ))}
+            {Array.from({ length: rowsToFill > 0 ? rowsToFill : 0 }, (_, i) => (
+              <tr key={`empty-${i}`}>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             ))}
           </tbody>
@@ -75,7 +88,7 @@ export const IncidentsTable = ({
         </button>
         <span>{page}</span>
         <button
-          disabled={start + 3 >= total}
+          disabled={start + itemsPerPage >= total}
           onClick={onNext}
           className={styles.pagination_text}
         >
