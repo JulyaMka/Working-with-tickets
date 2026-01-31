@@ -4,8 +4,9 @@ import styles from "./IncidentsPage.module.css";
 import { Incident } from "../../entities/incident";
 import { incidentsApi } from "../../shared/api/incidentsApi";
 import { fetchHotTickets } from "../../shared/api/alertsApi";
-import { InfoPanel } from "../../widgets/InfoPanel";
+
 import { Header } from "../../widgets/Header";
+import { InfoPanel } from "../../widgets/InfoPanel";
 import { AlertsPanel } from "../../widgets/AlertsPanel";
 import { IncidentsTable } from "../../widgets/IncidentsTable";
 
@@ -14,28 +15,35 @@ const ITEMS_PER_PAGE = 10;
 export const IncidentsPage = () => {
   const [page, setPage] = useState(1);
 
-  const [hotTickets, setHotTickets] = useState<number[]>([]);
   const [incidents, setIncidents] = useState<Incident[]>([]);
-  const [hotLoading, setHotLoading] = useState(true);
   const [incidentsLoading, setIncidentsLoading] = useState(true);
 
-  useEffect(() => {
-    loadHotTickets();
-    loadIncidents();
-  }, []);
+  const [hotTickets, setHotTickets] = useState<number[]>([]);
+  const [hotLoading, setHotLoading] = useState(false);
 
-  const loadHotTickets = async () => {
-    setHotLoading(true);
-    const data = await fetchHotTickets();
-    setHotTickets(data);
-    setHotLoading(false);
-  };
+  useEffect(() => {
+    loadIncidents();
+    loadHotTickets();
+  }, []);
 
   const loadIncidents = async () => {
     setIncidentsLoading(true);
-    const data = await incidentsApi.getIncidents();
-    setIncidents(data);
-    setIncidentsLoading(false);
+    try {
+      const data = await incidentsApi.getIncidents();
+      setIncidents(data);
+    } finally {
+      setIncidentsLoading(false);
+    }
+  };
+
+  const loadHotTickets = async () => {
+    setHotLoading(true);
+    try {
+      const data = await fetchHotTickets();
+      setHotTickets(data);
+    } finally {
+      setHotLoading(false);
+    }
   };
 
   const start = (page - 1) * ITEMS_PER_PAGE;
@@ -48,11 +56,16 @@ export const IncidentsPage = () => {
 
       {/* Top section */}
       <section className={styles.top}>
-        <InfoPanel/>
-        {hotLoading ? (
-          <div>Загрузка горящих инцидентов...</div>
+        <InfoPanel />
+
+        {hotLoading && hotTickets.length === 0 ? (
+          <div>Загрузка горящих тикетов...</div>
         ) : (
-          <AlertsPanel hotTickets={hotTickets} onRefresh={loadHotTickets} />
+          <AlertsPanel
+            hotTickets={hotTickets}
+            hotLoading={hotLoading}
+            onRefresh={loadHotTickets}
+          />
         )}
       </section>
 
@@ -65,8 +78,12 @@ export const IncidentsPage = () => {
           start={start}
           total={incidents.length}
           page={page}
-          onPrev={() => setPage(page - 1)}
-          onNext={() => setPage(page + 1)}
+          onPrev={() => setPage((p) => Math.max(1, p - 1))}
+          onNext={() =>
+            setPage((p) =>
+              p * ITEMS_PER_PAGE < incidents.length ? p + 1 : p
+            )
+          }
         />
       )}
     </div>

@@ -37,3 +37,17 @@
   position: relative;
   padding-left: 15px;
 }
+
+.alertList::-webkit-scrollbar {
+  width: 5px; 
+}
+
+.alertList::-webkit-scrollbar-track {
+  background: var(--btn-text);
+  border-radius: 8px;
+}
+
+.alertList::-webkit-scrollbar-thumb {
+  background-color: var(--btn-bg);
+  border-radius: 8px;
+}
