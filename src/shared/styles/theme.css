@@ -1,0 +1,38 @@
+body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* SVG иконка */
+.theme-icon {
+  color: currentColor;
+}
+
+.sun {
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.moon {
+  fill: currentColor;
+}
+
+/* Тёмная тема */
+.theme-icon.dark .sun {
+  opacity: 0;
+}
+
+.theme-icon.dark .moon {
+  opacity: 1;
+}
+
+/* Светлая тема */
+.theme-icon:not(.dark) .sun {
+  opacity: 1;
+}
+
+.theme-icon:not(.dark) .moon {
+  opacity: 0;
+}
